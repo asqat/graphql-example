@@ -22,6 +22,12 @@ func main() {
 				return 12 + 12, nil
 			},
 		},
+		"is_human": &graphql.Field{
+			Type: graphql.Boolean,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				return true, nil
+			},
+		},
 	}
 	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
 	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
@@ -34,6 +40,7 @@ func main() {
 	query := `
 		{
 			number
+			is_human
 		}
 	`
 	params := graphql.Params{Schema: schema, RequestString: query}
