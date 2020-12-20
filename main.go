@@ -28,6 +28,12 @@ func main() {
 				return true, nil
 			},
 		},
+		"percent": &graphql.Field{
+			Type: graphql.Float,
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				return 1234.5678, nil
+			},
+		},
 	}
 	rootQuery := graphql.ObjectConfig{Name: "RootQuery", Fields: fields}
 	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
@@ -41,6 +47,7 @@ func main() {
 		{
 			number
 			is_human
+			percent
 		}
 	`
 	params := graphql.Params{Schema: schema, RequestString: query}
